@@ -1,0 +1,50 @@
+openapi: 3.0.1
+info:
+  title: Webhook Stack
+  description: 'This is a serverless stack project with open api'
+  version: '1.0'
+paths:
+  /:
+    get:
+      tags:
+      - open-api-backend
+      summary: Testing out Open API
+      description: Serverless stack + Open API 
+      operationId: openapi
+      parameters:
+      - name: name
+        in: query
+        description: Name of person
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        400:
+          description: Invalid Arguments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    SuccessResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - success
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - error
